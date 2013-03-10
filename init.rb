@@ -8,6 +8,11 @@ Redmine::Plugin.register :redmine_itil_priority do
   url "https://github.com/jbbarth/redmine_itil_priority"
 end
 
+# Patch of core classes
+ActionDispatch::Callbacks.to_prepare do
+  require_dependency 'redmine_itil_priority/issue_patch'
+end
+
 # Little hack for using the "deface" gem in redmine:
 # - redmine plugins are not railties nor engines, so deface overrides in app/overrides/ are not detected automatically
 # - deface doesn"t support direct loading anymore ; it unloads everything at boot so that reload in dev works
