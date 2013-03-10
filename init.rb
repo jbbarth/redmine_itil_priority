@@ -6,6 +6,14 @@ Redmine::Plugin.register :redmine_itil_priority do
   requires_redmine :version_or_higher => "2.1.0"
   version "0.0.1"
   url "https://github.com/jbbarth/redmine_itil_priority"
+  settings :partial => 'settings/itil_priority',
+           :default => {
+             "label_urgency_1" => "Not urgent", "label_urgency_2" => "Normal", "label_urgency_3" => "Urgent",
+             "label_impact_1" => "Low impact", "label_impact_2" => "Medium impact", "label_impact_3" => "Important impact",
+             "priority_i1_u1" => 1, "priority_i1_u2" => 2, "priority_i1_u3" => 2,
+             "priority_i2_u1" => 2, "priority_i2_u2" => 2, "priority_i2_u3" => 3,
+             "priority_i3_u1" => 2, "priority_i3_u2" => 3, "priority_i3_u3" => 3
+           }
 end
 
 # Patch of core classes

@@ -1,0 +1,31 @@
+<style>
+  .itil-priority-mapping { border-collapse:collapse; border-spacing:0; }
+  .itil-priority-mapping th, .itil-priority-mapping td { padding:10px 20px; border:1px solid #bbb; }
+  .itil-priority-mapping th.no-border { border:0; }
+</style>
+<table class=itil-priority-mapping>
+  <tr>
+    <th class=no-border></th>
+    <th><%= l(:label_urgency) %><br><%= text_field_tag "settings[label_urgency_1]", @settings["label_urgency_1"] %></th>
+    <th><%= l(:label_urgency) %><br><%= text_field_tag "settings[label_urgency_2]", @settings["label_urgency_2"] %></th>
+    <th><%= l(:label_urgency) %><br><%= text_field_tag "settings[label_urgency_3]", @settings["label_urgency_3"] %></th>
+  </tr>
+  <tr>
+    <th><%= l(:label_impact) %> <%= text_field_tag "settings[label_impact_1]", @settings["label_impact_1"] %></th>
+    <th><%= select_tag "settings[priority_i1_u1]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i1_u1"]) %></th>
+    <th><%= select_tag "settings[priority_i1_u2]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i1_u2"]) %></th>
+    <th><%= select_tag "settings[priority_i1_u3]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i1_u3"]) %></th>
+  </tr>
+  <tr>
+    <th><%= l(:label_impact) %> <%= text_field_tag "settings[label_impact_2]", @settings["label_impact_2"] %></th>
+    <th><%= select_tag "settings[priority_i2_u1]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i2_u1"]) %></th>
+    <th><%= select_tag "settings[priority_i2_u2]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i2_u2"]) %></th>
+    <th><%= select_tag "settings[priority_i2_u3]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i2_u3"]) %></th>
+  </tr>
+  <tr>
+    <th><%= l(:label_impact) %> <%= text_field_tag "settings[label_impact_3]", @settings["label_impact_3"] %></th>
+    <th><%= select_tag "settings[priority_i3_u1]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i3_u1"]) %></th>
+    <th><%= select_tag "settings[priority_i3_u2]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i3_u2"]) %></th>
+    <th><%= select_tag "settings[priority_i3_u3]", options_from_collection_for_select(IssuePriority.active, :id, :name, @settings["priority_i3_u3"]) %></th>
+  </tr>
+</table>
