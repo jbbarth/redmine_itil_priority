@@ -1,0 +1,44 @@
+<style>
+  .itil-priority { position:relative; display:inline-block; min-width:440px; min-height:50px;
+                   background-color:#fffff3; padding:4px 6px; border:1px solid #eee; }
+  .itil-priority label.inline { font-weight:normal; display:inline-block; width:60px; text-align:left; }
+  .itil-priority select { width:150px !important; }
+  .real-priority { box-sizing:border-box; width:100%; position:absolute; top:0; left:230px; height:100%; padding-top:1.4em; }
+  .real-priority > .priority { position:absolute; top:1.4em; left:25px; font-size:110%; }
+</style>
+<script>
+$(function() {
+  function recalculateItilPriority(impact, urgency) {
+    var priority_id = $("#priority_i"+impact+"_u"+urgency).html() 
+    var $select = $("#issue_priority_id")
+    $select.val(priority_id)
+    $("#real-priority-display").html($select.find("option:selected").html())
+  }
+  $("#issue_urgency_id, #issue_impact_id").on("change", function() {
+    recalculateItilPriority($("#issue_impact_id").val(), $("#issue_urgency_id").val())
+  })
+})
+</script>
+<% (1..3).each do |i| %>
+  <% (1..3).each do |u| %>
+    <% key = "priority_i#{i}_u#{u}" %>
+    <% hsh = Setting["plugin_redmine_itil_priority"] || {} %>
+    <%= content_tag(:span, hsh[key], :id => key, :style => "display:none;") %>
+  <% end %>
+<% end %>
+<label><%= l(:field_priority) %></label>
+<span class=itil-priority>
+  <label class=inline><%= l(:field_urgency) %></label>
+  <%= select_tag "issue[urgency_id]", options_for_select(RedmineItilPriority.urgency_options, @issue.urgency_id) %>
+  <br>
+  <label class=inline><%= l(:field_impact) %></label>
+  <%= select_tag "issue[impact_id]", options_for_select(RedmineItilPriority.impact_options, @issue.impact_id) %>
+  <span class=real-priority>
+    <%= image_tag("stock_link.png", :plugin => "redmine_itil_priority") %>
+    <span class=priority>
+      <%= select_tag "issue[priority_id]", options_for_select(@priorities.map{|p| [p.name, p.id]}, @issue.priority_id),
+                     :disabled => !@issue.leaf?, :style => "display:none;" %>
+      <%= content_tag :span, @issue.priority, :id => "real-priority-display" %>
+    </span>
+  </span>
+</span>

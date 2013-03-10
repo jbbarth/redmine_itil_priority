@@ -16,6 +16,9 @@ Redmine::Plugin.register :redmine_itil_priority do
            }
 end
 
+# Extra classes
+require_dependency 'redmine_itil_priority'
+
 # Patch of core classes
 ActionDispatch::Callbacks.to_prepare do
   require_dependency 'redmine_itil_priority/issue_patch'
